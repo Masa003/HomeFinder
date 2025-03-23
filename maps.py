@@ -21,11 +21,11 @@ def convert_to_minutes(time_str):
         return hours * 60 + minutes
     return float('inf')
 
-def get_travel_time(entry, destination):
+def get_travel_time(entry, destination, mode):
     origin = f"{entry['address']}, {entry['zipCode']} {entry['city']}, Denmark"
 
     def fetch_duration(o, d):
-        url = f"https://maps.googleapis.com/maps/api/directions/json?origin={o}&destination={d}&mode=bicycling&key={API_KEY}"
+        url = f"https://maps.googleapis.com/maps/api/directions/json?origin={o}&destination={d}&mode={mode}&key={API_KEY}"
         try:
             response = requests.get(url)
             response.raise_for_status()
@@ -47,8 +47,8 @@ def get_travel_time(entry, destination):
     return average_duration
 
 for entry in addresses:
-    martin_time = get_travel_time(entry, DESTINATION_MARTIN)
-    marie_time = get_travel_time(entry, DESTINATION_MARIE)
+    martin_time = get_travel_time(entry, DESTINATION_MARTIN, "transit")
+    marie_time = get_travel_time(entry, DESTINATION_MARIE, "driving")
     entry["travel_time_martin"] = martin_time
     entry["travel_time_marie"] = marie_time
     # Calculate combined travel time (average of both)
