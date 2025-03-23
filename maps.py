@@ -6,7 +6,7 @@ import re
 with open("updated_addresses.json", "r", encoding="utf-8") as f:
     addresses = json.load(f)
 
-API_KEY = "AIzaSyB0Jmg8aj4Cq2HLfmo88yoIO7-5Tz9FPMw"
+API_KEY = ""
 DESTINATION_MARTIN = "Gærtorvet 1, Denmark"
 DESTINATION_MARIE = "Smallegade 2, 2000 Frederiksberg, Denmark"
 
